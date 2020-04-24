@@ -3,12 +3,17 @@
 PROJECTFOLDER = rota
 GODOTFOLDER = godot
 GODOTCPPFOLDER = godot-cpp
-
-#estragon
-estragon :
-	echo "using estragon" ;
+GODOT_BIN = ./godoteditor.bin 
 
 all : godot
+
+#estragon tool
+estragon : submodules
+
+# godot headers for gdnative
+godot-cpp : submodules estragon godot
+	python3 estragon/estragon_godot_cpp.py "$(PWD)"/"$(GODOTCPPFOLDER)" target=release_debug;
+	"$(GODOT_BIN)"  --gdnative-generate-json-api api.json
 
 
 #
@@ -17,22 +22,12 @@ all : godot
 godot : estragon
 	#. ./gitcommand.sh && pull_godot ;
 	python3 estragon/estragon_build_godot.py "$(PWD)"/godot target=release_debug;
-	ln -sf ./godot/bin/godot.x11.tools.64 ./godoteditor.bin ;
+	ln -sf ./godot/bin/godot.x11.tools.64 "$(GODOT_BIN)" ;
 	
-git_pull:
-	pull_subtrees ;
+# get all project's submodules
+submodules:
+	git submodule update --init --recursive
 
 
-godot-cpp: godot
-	git clone --recursive https://github.com/GodotNativeTools/godot-cpp 
-	python3 estragon/estragon_build_godot.py "$(PWD)"/"$(GODOTCPPFOLDER)" target=release_debug;
-	
-	
-	
-
-cpp_bindings: godot
-	
-	
-	
-project : godot cpp_bindings	
+project : godot estragon	
 	

@@ -4,3 +4,6 @@
 [submodule "estragon"]
 	path = estragon
 	url = https://github.com/MadMcCrow/estragon
+[submodule "godot-cpp"]
+	path = godot-cpp
+	url = https://github.com/GodotNativeTools/godot-cpp
