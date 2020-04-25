@@ -1,10 +1,36 @@
-PROJECTFOLDER = rota
-GODOTFOLDER = godot
-GODOTCPPFOLDER = godot-cpp
-GODOT_BIN = ./godot-editor.bin
+# Copyright (c) 2020 Noé Perard-Gayot. All rights reserved.
+# This work is licensed under the terms of the MIT license. 
+# For a copy, see <https://opensource.org/licenses/MIT>.
 
+##
+## Makefile to build all rota and related projects 
+##
+
+##
+## stored variable
+##
+PROJECTFOLDER = rota
+
+GODOT_CPPFOLDER = godot-cpp
+GODOT_BIN = ./godot-editor.bin
+GODOT_FOLDER = godot
+GODOT_REMOTE = "https://github.com/MadMcCrow/godot.git"
+GODOT_BRANCH = "master"
+
+ESTRAGON_REMOTE = "https://github.com/MadMcCrow/estragon.git"
+ESTRAGON_BRANCH = "production"
+
+TARGET ="target=debug"
+
+
+##
+## Remove make output
+##
 .SILENT: all godot-cpp editor estragon submodules
 
+##
+##  build what we need to start working
+##
 all : godot estragon project
 
 ##
@@ -25,7 +51,7 @@ estragon : submodules
 ## godot headers and data for gdnative support
 ##
 godot-cpp : submodules estragon godot
-	python3 estragon/estragon_godot_cpp.py "$(PWD)/$(GODOTCPPFOLDER)" target=debug;
+	python3 estragon/estragon_godot_cpp.py "$(PWD)/$(GODOTCPPFOLDER)" $(TARGET);
 	$(GODOT_BIN)  --gdnative-generate-json-api api.json
 
 
@@ -37,7 +63,7 @@ godot : editor
 ## actual rule to make sure we run every time to 
 editor : estragon
 	#. ./gitcommand.sh && pull_godot ;
-	python3 estragon/estragon_build_godot.py $(PWD)/godot target=debug;
+	python3 estragon/estragon_build_godot.py $(PWD)/godot $(TARGET);
 	#for file in ./godot/bin/* ;do echo "${file} -> ${file#.*.}" ; done
 	rm "$(GODOT_BIN)" || true
 	ln -s "$(GODOTFOLDER)/bin/godot.x11.tools.64" "$(GODOT_BIN)";
