@@ -20,5 +20,5 @@ config/icon="res://icon.png"
 
 [rendering]
 
-quality/driver/driver_name="GLES3"
+quality/driver/driver_name="vulkan"
 environment/default_environment="res://default_env.tres"
