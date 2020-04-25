@@ -51,7 +51,7 @@ estragon : submodules
 ## godot headers and data for gdnative support
 ##
 godot-cpp : submodules estragon godot
-	python3 estragon/estragon_godot_cpp.py "$(PWD)/$(GODOTCPPFOLDER)" $(TARGET);
+	python3 estragon/estragon_godot_cpp.py "$(PWD)/$(GODOT_CPPFOLDER)" $(TARGET);
 	$(GODOT_BIN)  --gdnative-generate-json-api api.json
 
 
@@ -66,7 +66,7 @@ editor : estragon
 	python3 estragon/estragon_build_godot.py $(PWD)/godot $(TARGET);
 	#for file in ./godot/bin/* ;do echo "${file} -> ${file#.*.}" ; done
 	rm "$(GODOT_BIN)" || true
-	ln -s "$(GODOTFOLDER)/bin/godot.x11.tools.64" "$(GODOT_BIN)";
+	ln -s "$(GODOT_FOLDER)/bin/godot.x11.tools.64" "$(GODOT_BIN)";
 	chmod +x $(GODOT_BIN)
 	
 
@@ -82,7 +82,7 @@ project : godot estragon godot-cpp
 ##
 clean :
 	rm -f "$(GODOT_BIN)"
-	rm -f "$(GODOTFOLDER)/bin/*" 
+	rm -f "$(GODOT_FOLDER)/bin/*" 
 	
 	
 	
