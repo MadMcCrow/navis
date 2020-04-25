@@ -1,6 +1,7 @@
 [submodule "godot"]
 	path = godot
 	url = https://github.com/MadMcCrow/godot
+	branch = master
 [submodule "estragon"]
 	path = estragon
 	url = https://github.com/MadMcCrow/estragon
@@ -8,3 +9,4 @@
 [submodule "godot-cpp"]
 	path = godot-cpp
 	url = https://github.com/GodotNativeTools/godot-cpp
+	branch = master

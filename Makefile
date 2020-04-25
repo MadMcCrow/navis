@@ -26,7 +26,7 @@ TARGET ="target=debug"
 ##
 ## Remove make output
 ##
-.SILENT: all godot-cpp editor estragon submodules
+.SILENT: all godot-cpp editor estragon submodules $(GODOT_BIN)
 
 ##
 ##  build what we need to start working
@@ -51,22 +51,19 @@ estragon : submodules
 ## godot headers and data for gdnative support
 ##
 godot-cpp : submodules estragon godot
-	python3 estragon/estragon_godot_cpp.py "$(PWD)/$(GODOT_CPPFOLDER)" $(TARGET);
 	$(GODOT_BIN)  --gdnative-generate-json-api api.json
-
+	python3 estragon/estragon_godot_cpp.py "$(PWD)/$(GODOT_CPPFOLDER)" $(TARGET) "use_custom_api_file=yes custom_api_file=../api.json";
 
 ##
 ## editor : the godot engine
 ## Build godot editor with specific options using estragon
 ##
-godot : editor
-## actual rule to make sure we run every time to 
-editor : estragon
-	#. ./gitcommand.sh && pull_godot ;
+godot : $(GODOT_BIN)
+## actual rule to make sure we run every time
+$(GODOT_BIN) : estragon
 	python3 estragon/estragon_build_godot.py $(PWD)/godot $(TARGET);
-	#for file in ./godot/bin/* ;do echo "${file} -> ${file#.*.}" ; done
 	rm "$(GODOT_BIN)" || true
-	ln -s "$(GODOT_FOLDER)/bin/godot.x11.tools.64" "$(GODOT_BIN)";
+	find $(GODOT_FOLDER)/bin -name '*tools*' |xargs -I {} ln -s {} "$(GODOT_BIN)"
 	chmod +x $(GODOT_BIN)
 	
 
