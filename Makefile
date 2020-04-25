@@ -9,7 +9,7 @@
 ##
 ## stored variable
 ##
-PROJECTFOLDER = rota
+PROJECT_FOLDER = rota
 
 GODOT_CPPFOLDER = godot-cpp
 GODOT_BIN = ./godot-editor.bin
@@ -75,6 +75,8 @@ editor : estragon
 ## Our code and related objects
 ##
 project : godot estragon godot-cpp 
+	# first let's build our gdnative code
+	python3 estragon/estragon_gdnative.py $(PWD)/$(PROJECT_FOLDER) $(TARGET);
 
 
 ##
