@@ -39,18 +39,19 @@ all : godot estragon project
 ##
 submodules:
 	git submodule update --init --recursive
+	
 
 ##
 ## Estragon tool
 ## Will help us build, add code etc...
 ##
-estragon : submodules
+estragon : 
 
 ##
 ## godot-cpp repository
 ## godot headers and data for gdnative support
 ##
-godot-cpp : submodules estragon godot
+godot-cpp : estragon godot
 	$(GODOT_BIN)  --gdnative-generate-json-api api.json
 	python3 estragon/estragon_godot_cpp.py "$(PWD)/$(GODOT_CPPFOLDER)" $(TARGET) "use_custom_api_file=yes custom_api_file=../api.json";
 
