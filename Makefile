@@ -51,9 +51,10 @@ estragon :
 ## godot-cpp repository
 ## godot headers and data for gdnative support
 ##
-godot-cpp : estragon godot
+godot-cpp : godot-cpp/bin
+godot-cpp/bin : estragon godot 
 	$(GODOT_BIN)  --gdnative-generate-json-api api.json
-	python3 estragon/estragon_godot_cpp.py "$(PWD)/$(GODOT_CPPFOLDER)" $(TARGET) "use_custom_api_file=yes custom_api_file=../api.json";
+	python3 estragon/estragon_godot_cpp.py "$(PWD)/$(GODOT_CPPFOLDER)" $(TARGET) #"use_custom_api_file=yes custom_api_file=../api.json";
 
 ##
 ## editor : the godot engine
