@@ -114,7 +114,10 @@ def getSubdirs(abs_path_dir : str) :
 ##
 def buildModule(subpath, modulename)   :
     sources = Glob(subpath + '/*.cpp')
-    filename =  "-".join([modulename,env['target_name']])
+    if env['target_name'] != str()  :
+        filename =  "-".join([modulename,env['target_name']])
+    else :
+        filename = modulename
     library = env.SharedLibrary(target=env['target_path']  + filename, source=sources)
     Default(library)
 
