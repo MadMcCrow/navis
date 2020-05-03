@@ -1,0 +1,8 @@
+[submodule "godot"]
+	path = godot
+	url = https://github.com/MadMcCrow/godot
+	branch = Rota
+[submodule "estragon"]
+	path = estragon
+	url = https://github.com/MadMcCrow/estragon
+	branch = production

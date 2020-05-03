@@ -26,7 +26,7 @@ TARGET ="target=debug"
 ##
 ## Remove make output
 ##
-.SILENT: all godot-cpp editor estragon submodules $(GODOT_BIN)
+.SILENT: all editor estragon submodules $(GODOT_BIN)
 
 ##
 ##  build what we need to start working
@@ -51,10 +51,10 @@ estragon :
 ## godot-cpp repository
 ## godot headers and data for gdnative support
 ##
-godot-cpp : godot-cpp/bin
-godot-cpp/bin : estragon godot 
-	$(GODOT_BIN)  --gdnative-generate-json-api api.json
-	python3 estragon/estragon_godot_cpp.py "$(PWD)/$(GODOT_CPPFOLDER)" $(TARGET) #"use_custom_api_file=yes custom_api_file=../api.json";
+#godot-cpp : godot-cpp/bin
+#godot-cpp/bin : estragon godot 
+#	$(GODOT_BIN)  --gdnative-generate-json-api api.json
+#	python3 estragon/estragon_godot_cpp.py "$(PWD)/$(GODOT_CPPFOLDER)" $(TARGET) #"use_custom_api_file=yes custom_api_file=../api.json";
 
 ##
 ## editor : the godot engine
@@ -73,7 +73,7 @@ $(GODOT_BIN) : estragon
 ## Project :
 ## Our code and related objects
 ##
-project : godot estragon godot-cpp 
+project : godot estragon
 	# first let's build our gdnative code
 	python3 estragon/estragon_gdnative.py $(PWD)/$(PROJECT_FOLDER) $(TARGET);
 

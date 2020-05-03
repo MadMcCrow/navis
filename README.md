@@ -1,2 +1,2 @@
-# ROTA
-Rota is a car game with the godot engine. 
+# NAVIS
+Navis is an attempt of making ships in godot
