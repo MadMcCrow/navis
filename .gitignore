@@ -1,0 +1,40 @@
+# VisualStudio Code files
+.vscode
+
+# Prerequisites
+*.d
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+*.bin
+
+# Generated apis wil be in json format.
+# ignoring json for now is a safe bet
+*.json
+
+# Scons by-product
+*.scons*
+
