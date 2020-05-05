@@ -34,3 +34,7 @@
 # Generated apis wil be in json format.
 # ignoring json for now is a safe bet
 *.json
+
+# Scons by-product
+*.scons*
+

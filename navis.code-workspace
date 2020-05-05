@@ -1,5 +1,13 @@
 {
 	"folders": [
+        {
+            "path": ".",
+            "name": "navis",
+            "settings" :
+            {
+                "files.exclude": "./*"
+            }
+        },
 		{
 			"path": "godot/modules/navis",
 			"name": "c++"
