@@ -1,0 +1,25 @@
+{
+	"folders": [
+		{
+			"path": "godot/modules/navis",
+			"name": "c++"
+		},
+		{
+			"path": "estragon",
+			"name": "estragon"
+		},
+		{
+			"path": "navis/src",
+			"name": "scripts",
+			"settings" :{
+				"files.autoSave": "afterDelay"
+			}
+		}
+	],
+	"settings": {
+		"[cpp]": {
+			"editor.wordBasedSuggestions": false,
+			"editor.suggest.insertMode": "replace"
+		}
+	}
+}

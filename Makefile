@@ -9,7 +9,7 @@
 ##
 ## stored variable
 ##
-PROJECT_FOLDER = rota
+PROJECT_FOLDER = navis
 
 GODOT_CPPFOLDER = godot-cpp
 GODOT_BIN = ./godot-editor.bin
@@ -26,12 +26,12 @@ TARGET ="target=debug"
 ##
 ## Remove make output
 ##
-.SILENT: all editor estragon submodules $(GODOT_BIN)
+.SILENT: all editor estragon submodules $(GODOT_BIN) $(PROJECT_FOLDER) 
 
 ##
 ##  build what we need to start working
 ##
-all : godot estragon project
+all : godot estragon $(PROJECT_FOLDER)
 
 ##
 ## Submodules : "clone" all sub-repository
@@ -62,20 +62,26 @@ estragon :
 ##
 godot : $(GODOT_BIN)
 ## actual rule to make sure we run every time
-$(GODOT_BIN) : estragon
+$(GODOT_BIN) : build_godot
 	python3 estragon/estragon_build_godot.py $(PWD)/godot $(TARGET);
 	rm "$(GODOT_BIN)" || true
 	find $(GODOT_FOLDER)/bin -name '*tools*' |xargs -I {} ln -s {} "$(GODOT_BIN)"
 	chmod +x $(GODOT_BIN)
-	
+
+build_godot : estragon
+	python3 estragon/estragon_build_godot.py $(PWD)/godot $(TARGET);
+	rm "$(GODOT_BIN)" || true
+	find $(GODOT_FOLDER)/bin -name '*tools*' |xargs -I {} ln -s {} "$(GODOT_BIN)"
+	chmod +x $(GODOT_BIN)
 
 ##
 ## Project :
 ## Our code and related objects
 ##
-project : godot estragon
-	# first let's build our gdnative code
-	python3 estragon/estragon_gdnative.py $(PWD)/$(PROJECT_FOLDER) $(TARGET);
+$(PROJECT_FOLDER) :  godot estragon project
+project : 
+	# no gd native 
+	# python3 estragon/estragon_gdnative.py $(PWD)/$(PROJECT_FOLDER) $(TARGET);
 
 
 ##
